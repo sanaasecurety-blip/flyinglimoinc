@@ -448,6 +448,16 @@ section{ padding: 96px 0; }
   box-shadow: 0 0 0 3px rgba(201,162,75,0.18);
 }
 .form-note{ text-align:center; font-size: 0.85rem; color: var(--muted); margin: 14px 0 0; }
+.hp-field{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+.form-status{
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 16px;
+  min-height: 0;
+}
+.form-status--success{ color: #2f7a3c; }
+.form-status--error{ color: #b23b3b; }
 .form-note a{ color: var(--gold-dark); font-weight:600; }
 
 /* ===== Footer ===== */

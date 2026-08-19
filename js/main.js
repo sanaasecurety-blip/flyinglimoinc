@@ -34,6 +34,74 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  var quoteForm = document.getElementById('quoteForm');
+  if (quoteForm) {
+    var statusEl = document.getElementById('formStatus');
+    var submitBtn = quoteForm.querySelector('button[type="submit"]');
+
+    quoteForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (!quoteForm.checkValidity()) {
+        quoteForm.reportValidity();
+        return;
+      }
+
+      var payload = {
+        name: document.getElementById('name').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        vehicle: document.getElementById('vehicle').value,
+        pickup: document.getElementById('pickup').value.trim(),
+        dropoff: document.getElementById('dropoff').value.trim(),
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value,
+        message: document.getElementById('message').value.trim(),
+        company: document.getElementById('company') ? document.getElementById('company').value : ''
+      };
+
+      submitBtn.disabled = true;
+      var originalLabel = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      if (statusEl) {
+        statusEl.textContent = '';
+        statusEl.className = 'form-status';
+      }
+
+      fetch('/api/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (resp) {
+          return resp.json().then(function (data) {
+            return { ok: resp.ok, data: data };
+          });
+        })
+        .then(function (result) {
+          if (result.ok && result.data && result.data.success) {
+            quoteForm.reset();
+            if (statusEl) {
+              statusEl.textContent = "Thanks! We've received your request and will follow up shortly. Check your email for confirmation.";
+              statusEl.className = 'form-status form-status--success';
+            }
+          } else {
+            throw new Error((result.data && result.data.error) || 'Failed to send');
+          }
+        })
+        .catch(function () {
+          if (statusEl) {
+            statusEl.textContent = 'Something went wrong sending your request. Please call us at +1 (415) 674-7777 or try again.';
+            statusEl.className = 'form-status form-status--error';
+          }
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalLabel;
+        });
+    });
+  }
+
   var header = document.getElementById('siteHeader');
   if (header) {
     window.addEventListener('scroll', function () {
