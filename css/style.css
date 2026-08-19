@@ -102,7 +102,7 @@ h1,h2,h3{ font-family: var(--serif); font-weight:600; margin:0; color: var(--bla
   gap: 20px;
   padding: 6px 24px;
 }
-.brand-logo{ height: 76px; width:auto; }
+.brand-logo{ height: 88px; width:auto; }
 .main-nav{
   display:flex;
   gap: 22px;
@@ -517,7 +517,7 @@ section{ padding: 96px 0; }
   .form-row{ grid-template-columns: 1fr; }
   .footer-inner{ grid-template-columns: 1fr; }
   .hero-stats{ gap: 26px; }
-  .brand-logo{ height: 40px; }
+  .brand-logo{ height: 46px; }
   section{ padding: 64px 0; }
 }
 
