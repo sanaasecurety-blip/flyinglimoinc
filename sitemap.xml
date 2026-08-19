@@ -6,102 +6,102 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/services.html</loc>
+    <loc>https://flyinglimo.vercel.app/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/fleet.html</loc>
+    <loc>https://flyinglimo.vercel.app/fleet</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/how-it-works.html</loc>
+    <loc>https://flyinglimo.vercel.app/how-it-works</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/testimonials.html</loc>
+    <loc>https://flyinglimo.vercel.app/testimonials</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/about.html</loc>
+    <loc>https://flyinglimo.vercel.app/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/contact.html</loc>
+    <loc>https://flyinglimo.vercel.app/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/services/airport-transfers.html</loc>
+    <loc>https://flyinglimo.vercel.app/services/airport-transfers</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/services/corporate-transportation.html</loc>
+    <loc>https://flyinglimo.vercel.app/services/corporate-transportation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/services/weddings-events.html</loc>
+    <loc>https://flyinglimo.vercel.app/services/weddings-events</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/services/hourly-private-chauffeur.html</loc>
+    <loc>https://flyinglimo.vercel.app/services/hourly-private-chauffeur</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/services/wine-brewery-tours.html</loc>
+    <loc>https://flyinglimo.vercel.app/services/wine-brewery-tours</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/services/concerts-sports-nightlife.html</loc>
+    <loc>https://flyinglimo.vercel.app/services/concerts-sports-nightlife</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/services/city-tours-sightseeing.html</loc>
+    <loc>https://flyinglimo.vercel.app/services/city-tours-sightseeing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/blog.html</loc>
+    <loc>https://flyinglimo.vercel.app/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/blog/why-meet-and-greet-service-is-worth-it.html</loc>
+    <loc>https://flyinglimo.vercel.app/blog/why-meet-and-greet-service-is-worth-it</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/blog/planning-wedding-transportation.html</loc>
+    <loc>https://flyinglimo.vercel.app/blog/planning-wedding-transportation</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/blog/napa-valley-wine-tour-itinerary.html</loc>
+    <loc>https://flyinglimo.vercel.app/blog/napa-valley-wine-tour-itinerary</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/blog/executive-car-service-saves-time.html</loc>
+    <loc>https://flyinglimo.vercel.app/blog/executive-car-service-saves-time</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/blog/bay-area-traffic-guide.html</loc>
+    <loc>https://flyinglimo.vercel.app/blog/bay-area-traffic-guide</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://flyinglimo.vercel.app/blog/first-ride-with-flying-limo.html</loc>
+    <loc>https://flyinglimo.vercel.app/blog/first-ride-with-flying-limo</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
