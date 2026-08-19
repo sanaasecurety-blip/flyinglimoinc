@@ -102,10 +102,10 @@ h1,h2,h3{ font-family: var(--serif); font-weight:600; margin:0; color: var(--bla
   gap: 20px;
   padding: 6px 24px;
 }
-.brand-logo{ height: 88px; width:auto; }
+.brand-logo{ height: 50px; width:auto; }
 .main-nav{
   display:flex;
-  gap: 22px;
+  gap: 17px;
   flex:1;
   justify-content:center;
   white-space: nowrap;
@@ -134,6 +134,7 @@ h1,h2,h3{ font-family: var(--serif); font-weight:600; margin:0; color: var(--bla
 .phone-link{
   display:flex; align-items:center; gap:8px;
   color: var(--ink); font-weight:600; font-size:0.9rem;
+  white-space: nowrap;
 }
 .phone-link svg{ color: var(--gold-dark); }
 .nav-toggle{
@@ -176,8 +177,8 @@ h1,h2,h3{ font-family: var(--serif); font-weight:600; margin:0; color: var(--bla
   content:"";
   position:absolute; inset:0;
   background:
-    radial-gradient(ellipse 900px 600px at 88% 15%, rgba(201,162,75,0.1), transparent 60%),
-    rgba(8,8,9,0.42);
+    radial-gradient(ellipse 900px 600px at 88% 15%, rgba(201,162,75,0.08), transparent 60%),
+    rgba(8,8,9,0.72);
 }
 .hero-inner{
   position:relative;
@@ -469,7 +470,7 @@ section{ padding: 96px 0; }
   padding-top: 70px;
   padding-bottom: 50px;
 }
-.footer-logo{ height: 44px; margin-bottom: 16px; }
+.footer-logo{ height: 40px; margin-bottom: 16px; }
 .footer-brand p{ font-size: 0.88rem; max-width: 260px; color: rgba(255,255,255,0.5); }
 .footer-col h4{
   color: var(--gold-light);
@@ -527,7 +528,7 @@ section{ padding: 96px 0; }
   .form-row{ grid-template-columns: 1fr; }
   .footer-inner{ grid-template-columns: 1fr; }
   .hero-stats{ gap: 26px; }
-  .brand-logo{ height: 46px; }
+  .brand-logo{ height: 40px; }
   section{ padding: 64px 0; }
 }
 
