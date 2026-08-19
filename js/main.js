@@ -21,6 +21,19 @@ document.addEventListener('DOMContentLoaded', function () {
     yearEl.textContent = new Date().getFullYear();
   }
 
+  var vehicleSelect = document.getElementById('vehicle');
+  if (vehicleSelect) {
+    var params = new URLSearchParams(window.location.search);
+    var preselect = params.get('vehicle');
+    if (preselect) {
+      Array.from(vehicleSelect.options).forEach(function (opt) {
+        if (opt.value.toLowerCase() === preselect.toLowerCase() || opt.text.toLowerCase() === preselect.toLowerCase()) {
+          vehicleSelect.value = opt.value;
+        }
+      });
+    }
+  }
+
   var header = document.getElementById('siteHeader');
   if (header) {
     window.addEventListener('scroll', function () {
