@@ -899,6 +899,64 @@ section{ padding: 96px 0; }
   .industries-grid{ grid-template-columns: repeat(2, 1fr); }
 }
 
+/* ===== Worldwide Service ===== */
+.worldwide{ position:relative; background: var(--black); overflow:hidden; padding: 130px 0; }
+.worldwide-bg{ position:absolute; inset:0; opacity: 0.16; }
+.worldwide-bg img{ width:100%; height:100%; object-fit:cover; }
+.worldwide-inner{
+  position:relative; z-index:1;
+  display:grid;
+  grid-template-columns: 400px 1fr;
+  gap: 80px;
+  align-items:center;
+}
+.worldwide-media{ position:relative; width:100%; height:400px; }
+.worldwide-diamond{
+  position:absolute;
+  overflow:hidden;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: var(--shadow-lg);
+}
+.worldwide-diamond img{ width:100%; height:100%; object-fit:cover; }
+.worldwide-diamond--main{ width:340px; height:340px; top:30px; left:20px; }
+.worldwide-diamond--accent1{ width:150px; height:150px; top:0; right:10px; }
+.worldwide-diamond--accent2{ width:130px; height:130px; bottom:10px; right:60px; }
+.worldwide-copy .eyebrow{ color: var(--gold-light); }
+.worldwide-copy h2{ color:#fff; font-size: clamp(1.8rem, 3.2vw, 2.6rem); margin-bottom: 18px; max-width: 620px; }
+.worldwide-copy > p{ color: rgba(255,255,255,0.75); margin-bottom: 28px; max-width: 560px; }
+.worldwide-list{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 28px;
+  margin-bottom: 32px;
+  max-width: 480px;
+}
+.worldwide-list li{
+  position:relative;
+  padding-left: 26px;
+  color:#fff;
+  font-weight:500;
+  font-size: 0.95rem;
+}
+.worldwide-list li::before{
+  content:"";
+  position:absolute; left:0; top:7px;
+  width:14px; height:14px;
+  border-radius:50%;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+}
+@media (max-width: 980px){
+  .worldwide-inner{ grid-template-columns: 1fr; gap: 60px; }
+  .worldwide-media{ max-width: 340px; margin: 0 auto; }
+}
+@media (max-width: 480px){
+  .worldwide{ padding: 90px 0; }
+  .worldwide-diamond--accent1, .worldwide-diamond--accent2{ display:none; }
+  .worldwide-media{ height: 280px; }
+  .worldwide-diamond--main{ width:260px; height:260px; left:50%; top:10px; transform: translateX(-50%); }
+  .worldwide-list{ grid-template-columns: 1fr; }
+}
+
 .about-teaser{ background: var(--cream-2); }
 .about-teaser-inner{
   display:grid;
