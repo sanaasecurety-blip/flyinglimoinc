@@ -242,6 +242,8 @@ section{ padding: 96px 0; }
 .section-head h2{ font-size: clamp(1.8rem, 3vw, 2.5rem); }
 .section-head.light .eyebrow{ color: var(--gold-light); }
 .section-head.light h2{ color:#fff; }
+.section-head.center{ max-width: 640px; margin: 0 auto 52px; text-align: center; }
+.section-sub{ color: var(--muted); margin-top: 14px; }
 
 /* ===== Process ===== */
 .process{ background: var(--cream); }
@@ -832,6 +834,71 @@ section{ padding: 96px 0; }
 .btn-outline-dark:hover{ background: var(--black); color:#fff; border-color: var(--black); }
 
 /* ===== About Teaser (homepage) ===== */
+/* ===== Industries ===== */
+.industries{ background: var(--cream); }
+.industries-grid{
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px;
+}
+.industry-card{
+  position: relative;
+  display:block;
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transition: transform .25s ease;
+}
+.industry-card:hover{ transform: translateY(-4px); }
+.industry-card img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit: cover;
+}
+.industry-card::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(8,8,9,0.92) 20%, rgba(8,8,9,0.55) 55%, rgba(8,8,9,0.35) 100%);
+}
+.industry-corner{
+  position:absolute; top:0; right:0;
+  width:0; height:0;
+  border-style: solid;
+  border-width: 0 34px 34px 0;
+  border-color: transparent var(--gold) transparent transparent;
+  z-index: 2;
+}
+.industry-body{
+  position:absolute; left:0; right:0; bottom:0;
+  z-index: 2;
+  padding: 22px 18px;
+}
+.industry-icon{
+  width: 42px; height:42px;
+  border-radius:50%;
+  border: 1.5px solid var(--gold);
+  color: var(--gold-light);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom: 14px;
+}
+.industry-body h3{ color:#fff; font-size: 1.1rem; margin-bottom: 10px; }
+.industry-link{
+  display:inline-flex; align-items:center; gap:8px;
+  color: var(--gold-light);
+  font-size: 0.72rem;
+  font-weight:600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.industry-link i{ font-style:normal; }
+@media (max-width: 980px){
+  .industries-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 620px){
+  .industries-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
 .about-teaser{ background: var(--cream-2); }
 .about-teaser-inner{
   display:grid;
