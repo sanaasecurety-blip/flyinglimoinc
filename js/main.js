@@ -102,6 +102,145 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  function setupLocationAutocomplete(inputId, resultsId) {
+    var input = document.getElementById(inputId);
+    var results = document.getElementById(resultsId);
+    if (!input || !results) return;
+
+    var debounceTimer;
+    var controller;
+    var items = [];
+    var activeIndex = -1;
+    var lastQuery = '';
+
+    function closeResults() {
+      results.classList.remove('is-open');
+      results.innerHTML = '';
+      items = [];
+      activeIndex = -1;
+    }
+
+    function highlight(index) {
+      var els = Array.from(results.querySelectorAll('.autocomplete-item'));
+      els.forEach(function (el) { el.classList.remove('is-active'); });
+      if (index >= 0 && els[index]) {
+        els[index].classList.add('is-active');
+        els[index].scrollIntoView({ block: 'nearest' });
+      }
+      activeIndex = index;
+    }
+
+    function selectItem(item) {
+      input.value = item.display_name;
+      closeResults();
+    }
+
+    function renderResults(list) {
+      results.innerHTML = '';
+      items = list;
+      activeIndex = -1;
+
+      if (!list.length) {
+        var empty = document.createElement('div');
+        empty.className = 'autocomplete-empty';
+        empty.textContent = 'No matching places found';
+        results.appendChild(empty);
+        results.classList.add('is-open');
+        return;
+      }
+
+      list.forEach(function (item) {
+        var parts = item.display_name.split(',');
+        var main = parts[0].trim();
+        var sub = parts.slice(1).join(',').trim();
+
+        var el = document.createElement('div');
+        el.className = 'autocomplete-item';
+        el.setAttribute('role', 'option');
+
+        var mainEl = document.createElement('span');
+        mainEl.className = 'ac-main';
+        mainEl.textContent = main;
+        el.appendChild(mainEl);
+
+        if (sub) {
+          var subEl = document.createElement('span');
+          subEl.className = 'ac-sub';
+          subEl.textContent = sub;
+          el.appendChild(subEl);
+        }
+
+        el.addEventListener('mousedown', function (e) {
+          e.preventDefault();
+          selectItem(item);
+        });
+
+        results.appendChild(el);
+      });
+
+      results.classList.add('is-open');
+    }
+
+    function search(query) {
+      if (controller) controller.abort();
+      controller = new AbortController();
+
+      var url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=0&limit=6&q=' + encodeURIComponent(query);
+
+      fetch(url, { signal: controller.signal, headers: { 'Accept': 'application/json' } })
+        .then(function (resp) { return resp.json(); })
+        .then(function (data) {
+          if (input.value.trim() === query) {
+            renderResults(Array.isArray(data) ? data : []);
+          }
+        })
+        .catch(function (err) {
+          if (err.name !== 'AbortError') closeResults();
+        });
+    }
+
+    input.addEventListener('input', function () {
+      var query = input.value.trim();
+      clearTimeout(debounceTimer);
+
+      if (query.length < 3) {
+        closeResults();
+        return;
+      }
+
+      debounceTimer = setTimeout(function () {
+        lastQuery = query;
+        search(query);
+      }, 350);
+    });
+
+    input.addEventListener('keydown', function (e) {
+      if (!results.classList.contains('is-open') || !items.length) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        highlight(Math.min(activeIndex + 1, items.length - 1));
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        highlight(Math.max(activeIndex - 1, 0));
+      } else if (e.key === 'Enter') {
+        if (activeIndex >= 0) {
+          e.preventDefault();
+          selectItem(items[activeIndex]);
+        }
+      } else if (e.key === 'Escape') {
+        closeResults();
+      }
+    });
+
+    input.addEventListener('blur', function () {
+      setTimeout(closeResults, 150);
+    });
+  }
+
+  setupLocationAutocomplete('pickup', 'pickupResults');
+  setupLocationAutocomplete('dropoff', 'dropoffResults');
+
   var carousel = document.querySelector('.testimonial-carousel');
   if (carousel) {
     var slides = Array.from(carousel.querySelectorAll('.tc-slide'));
