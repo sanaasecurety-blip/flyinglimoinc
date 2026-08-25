@@ -1,7 +1,7 @@
 const RESEND_URL = 'https://api.resend.com/emails';
 const BUSINESS_EMAIL = 'contact@flyinglimoinc.com';
 const FROM_ADDRESS = 'Flying Limo <contact@flyinglimoinc.com>';
-const SITE_URL = 'https://flyinglimo.vercel.app';
+const SITE_URL = 'https://flyinglimoinc.com';
 const LOGO_URL = `${SITE_URL}/assets/logo.png`;
 
 const GOLD = '#c9a24b';
@@ -91,7 +91,7 @@ function emailShell({ eyebrow, heading, bodyHtml, preheader }) {
                   <td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:rgba(255,255,255,0.55);line-height:1.7;">
                     <strong style="color:${GOLD};font-size:13px;letter-spacing:0.03em;">FLYING LIMO</strong><br>
                     Luxury. Punctuality. Elevated.<br>
-                    San Francisco Bay Area &middot; Available 24/7<br>
+                    Worldwide &middot; Available 24/7<br>
                     <a href="tel:+14156747777" style="color:rgba(255,255,255,0.75);text-decoration:none;">+1 (415) 674-7777</a>
                     &nbsp;&middot;&nbsp;
                     <a href="mailto:contact@flyinglimoinc.com" style="color:rgba(255,255,255,0.75);text-decoration:none;">contact@flyinglimoinc.com</a>
@@ -116,7 +116,7 @@ module.exports = async function handler(req, res) {
   }
 
   const body = req.body || {};
-  const { name, phone, email, vehicle, pickup, dropoff, date, time, message, company } = body;
+  const { name, phone, email, industry, pickup, dropoff, date, time, message, company } = body;
 
   // Honeypot: bots fill hidden fields, humans never see them.
   if (company) {
@@ -139,7 +139,7 @@ module.exports = async function handler(req, res) {
   }
 
   const tripRows = [
-    { label: 'Vehicle', value: vehicle },
+    { label: 'Industry', value: industry },
     { label: 'Pickup', value: pickup },
     { label: 'Drop-off', value: dropoff },
     { label: 'Date', value: date },

@@ -1,6 +1,14 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/about", "destination": "/who-we-are", "permanent": true },
+    { "source": "/how-it-works", "destination": "/why-flying-limo", "permanent": true },
+    { "source": "/testimonials", "destination": "/why-flying-limo", "permanent": true },
+    { "source": "/fleet", "destination": "/", "permanent": true },
+    { "source": "/services", "destination": "/industries-we-serve", "permanent": true },
+    { "source": "/services/:slug", "destination": "/industries-we-serve", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

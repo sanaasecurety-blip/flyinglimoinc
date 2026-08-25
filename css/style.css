@@ -236,6 +236,193 @@ h1,h2,h3{ font-family: var(--serif); font-weight:600; margin:0; color: var(--bla
 }
 @keyframes bob{ 0%,100%{ transform: translate(-50%,0);} 50%{ transform: translate(-50%,8px);} }
 
+/* ===== Hero (split diamond) ===== */
+.hero--split{
+  position:relative;
+  min-height:auto;
+  display:block;
+  background: var(--cream);
+  padding: 150px 0 90px;
+  overflow:hidden;
+}
+.hero-split-inner{
+  display:grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 40px;
+  align-items:center;
+}
+.hero-split-copy .eyebrow{ color: var(--gold-dark); }
+.hero-split-copy h1{
+  color: var(--ink);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.12;
+  margin-bottom: 20px;
+}
+.hero-split-copy .hero-sub{
+  color: var(--muted);
+  font-size: 1.08rem;
+  max-width: 520px;
+  margin-bottom: 32px;
+  text-shadow:none;
+}
+.hero-split-media{ position:relative; height:440px; }
+.diamond{
+  position:absolute;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  overflow:hidden;
+  box-shadow: var(--shadow-lg);
+}
+.diamond img{ width:100%; height:100%; object-fit:cover; }
+.diamond.diamond--gold{ background: linear-gradient(135deg, var(--gold-light), var(--gold-dark)); }
+.diamond.diamond--dark{ background: var(--black); }
+.hero-split-media .diamond--1{ width:230px; height:230px; top:0; right:40px; }
+.hero-split-media .diamond--2{ width:140px; height:140px; top:180px; right:270px; }
+.hero-split-media .diamond--3{ width:100px; height:100px; bottom:40px; right:130px; }
+.hero-split-media .diamond--4{ width:170px; height:170px; bottom:0; right:330px; }
+@media (max-width: 980px){
+  .hero-split-inner{ grid-template-columns: 1fr; }
+  .hero-split-media{ height:320px; margin-top:20px; }
+  .hero-split-media .diamond--1{ width:170px; height:170px; right:10px; }
+  .hero-split-media .diamond--2{ width:110px; height:110px; top:130px; right:210px; }
+  .hero-split-media .diamond--4{ width:130px; height:130px; right:250px; }
+}
+@media (max-width: 620px){
+  .hero--split{ padding: 90px 0 60px; }
+  .hero-split-media{ display:none; }
+}
+
+/* ===== Difference grid ===== */
+.difference{ background: var(--cream-2); }
+.difference-inner{
+  display:grid;
+  grid-template-columns: 1fr 420px;
+  gap: 60px;
+  align-items:center;
+}
+.difference-media{ position:relative; height:420px; }
+.difference-media .diamond--main{ width:340px; height:340px; top:20px; left:40px; }
+.difference-media .diamond--accent1{ width:130px; height:130px; top:0; right:0; }
+.difference-media .diamond--accent2{ width:110px; height:110px; bottom:0; left:0; }
+.difference-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 34px 30px;
+}
+.difference-item .diff-num{
+  display:block;
+  font-family: var(--serif);
+  color: var(--gold);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+.difference-item h3{ font-size: 1.1rem; margin-bottom: 8px; }
+.difference-item p{ color: var(--muted); font-size: 0.92rem; margin: 0 0 10px; }
+@media (max-width: 980px){
+  .difference-inner{ grid-template-columns: 1fr; }
+  .difference-media{ order:-1; max-width:380px; margin:0 auto 20px; height:340px; }
+  .difference-media .diamond--main{ width:280px; height:280px; left:20px; }
+}
+@media (max-width: 560px){
+  .difference-grid{ grid-template-columns: 1fr; }
+}
+
+/* ===== Stats bar ===== */
+.stats-bar{
+  display:flex;
+  gap: 60px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin: 40px 0;
+  padding: 40px 0;
+  border-top: 1px solid #ece4d0;
+  border-bottom: 1px solid #ece4d0;
+}
+.stats-bar div{ text-align:center; }
+.stats-bar strong{
+  display:block;
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  color: var(--gold-dark);
+  line-height:1;
+}
+.stats-bar span{
+  display:block;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ===== FAQ accordion ===== */
+.faq{ max-width: 760px; margin: 0 auto; }
+.faq-item{
+  border-bottom: 1px solid #ece4d0;
+}
+.faq-item summary{
+  cursor:pointer;
+  list-style:none;
+  padding: 20px 32px 20px 0;
+  position:relative;
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 1rem;
+}
+.faq-item summary::-webkit-details-marker{ display:none; }
+.faq-item summary::after{
+  content:"+";
+  position:absolute; right:0; top:18px;
+  font-size: 1.4rem;
+  color: var(--gold-dark);
+  transition: transform .2s ease;
+}
+.faq-item[open] summary::after{ transform: rotate(45deg); }
+.faq-item p{ color: var(--muted); margin: 0 0 22px; font-size: 0.95rem; }
+
+/* ===== Testimonial carousel ===== */
+.testimonial-carousel{ max-width: 720px; margin: 0 auto; text-align:center; position:relative; }
+.tc-quote-mark{ color: var(--gold); opacity: 0.5; margin-bottom: 12px; }
+.tc-track{ position:relative; min-height: 160px; }
+.tc-slide{
+  display:none;
+  opacity:0;
+}
+.tc-slide.is-active{ display:block; opacity:1; animation: tcFade .5s ease; }
+@keyframes tcFade{ from{ opacity:0; transform: translateY(8px); } to{ opacity:1; transform: translateY(0); } }
+.tc-slide p{ font-family: var(--serif); font-size: clamp(1.2rem, 2.4vw, 1.6rem); color:#fff; line-height:1.5; margin: 0 0 20px; }
+.tc-slide cite{ color: var(--gold-light); font-style:normal; font-weight:600; letter-spacing:0.03em; font-size: 0.85rem; text-transform:uppercase; }
+.tc-dots{ display:flex; gap:10px; justify-content:center; margin-top: 32px; }
+.tc-dots button{
+  width:9px; height:9px;
+  border-radius:50%;
+  border:none;
+  background: rgba(255,255,255,0.3);
+  cursor:pointer;
+  padding:0;
+}
+.tc-dots button.is-active{ background: var(--gold); }
+.section-head.light .tc-quote-mark{ color: var(--gold-light); }
+
+/* ===== CTA contact list ===== */
+.cta-contact-list{
+  display:flex;
+  gap: 32px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top: 36px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+.cta-contact-list a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#fff;
+  font-size: 0.92rem;
+  font-weight:500;
+}
+.cta-contact-list svg{ color: var(--gold-light); flex-shrink:0; }
+
 /* ===== Section shared ===== */
 section{ padding: 96px 0; }
 .section-head{ max-width: 640px; margin: 0 0 52px; }
