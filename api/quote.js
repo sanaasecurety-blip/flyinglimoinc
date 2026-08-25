@@ -92,7 +92,7 @@ function emailShell({ eyebrow, heading, bodyHtml, preheader }) {
                     <strong style="color:${GOLD};font-size:13px;letter-spacing:0.03em;">FLYING LIMO</strong><br>
                     Luxury. Punctuality. Elevated.<br>
                     Worldwide &middot; Available 24/7<br>
-                    <a href="tel:+14156747777" style="color:rgba(255,255,255,0.75);text-decoration:none;">+1 (415) 674-7777</a>
+                    <a href="tel:+18779035946" style="color:rgba(255,255,255,0.75);text-decoration:none;">+1 (877) 903-5946</a>
                     &nbsp;&middot;&nbsp;
                     <a href="mailto:contact@flyinglimoinc.com" style="color:rgba(255,255,255,0.75);text-decoration:none;">contact@flyinglimoinc.com</a>
                   </td>
@@ -167,7 +167,7 @@ module.exports = async function handler(req, res) {
     <p style="margin:0 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:bold;letter-spacing:0.06em;text-transform:uppercase;color:${MUTED};">Your Request</p>
     ${detailsCard(tripRows)}
     <p style="margin:28px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#333;">Need to reach us sooner? We're available 24/7.</p>
-    ${button('Call +1 (415) 674-7777', 'tel:+14156747777')}
+    ${button('Call +1 (877) 903-5946', 'tel:+18779035946')}
   `;
 
   const businessHtml = emailShell({

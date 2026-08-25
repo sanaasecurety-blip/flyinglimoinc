@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(function () {
           if (statusEl) {
-            statusEl.textContent = 'Something went wrong sending your request. Please call us at +1 (415) 674-7777 or try again.';
+            statusEl.textContent = 'Something went wrong sending your request. Please call us at +1 (877) 903-5946 or try again.';
             statusEl.className = 'form-status form-status--error';
           }
         })
