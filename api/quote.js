@@ -116,7 +116,7 @@ module.exports = async function handler(req, res) {
   }
 
   const body = req.body || {};
-  const { name, phone, email, industry, pickup, dropoff, date, time, message, company } = body;
+  const { name, phone, email, industry, pickup, dropoff, date, time, luggage, message, company } = body;
 
   // Honeypot: bots fill hidden fields, humans never see them.
   if (company) {
@@ -144,6 +144,7 @@ module.exports = async function handler(req, res) {
     { label: 'Drop-off', value: dropoff },
     { label: 'Date', value: date },
     { label: 'Time', value: time },
+    { label: 'Luggage', value: luggage },
     { label: 'Notes', value: message },
   ];
 
