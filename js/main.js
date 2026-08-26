@@ -103,69 +103,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  var PRIVATE_JET_TERMINALS = [
-    { name: 'Teterboro Airport (KTEB)', sub: 'Teterboro, New Jersey, USA' },
-    { name: 'Van Nuys Airport (KVNY)', sub: 'Los Angeles, California, USA' },
-    { name: 'Westchester County Airport (KHPN)', sub: 'White Plains, New York, USA' },
-    { name: 'Republic Airport (KFRG)', sub: 'Farmingdale, New York, USA' },
-    { name: 'Miami Opa-locka Executive Airport (KOPF)', sub: 'Opa-locka, Florida, USA' },
-    { name: 'Palm Beach International Airport FBO (KPBI)', sub: 'West Palm Beach, Florida, USA' },
-    { name: 'Fort Lauderdale Executive Airport (KFXE)', sub: 'Fort Lauderdale, Florida, USA' },
-    { name: 'Scottsdale Airport (KSDL)', sub: 'Scottsdale, Arizona, USA' },
-    { name: 'Centennial Airport (KAPA)', sub: 'Denver, Colorado, USA' },
-    { name: 'Naples Airport (KAPF)', sub: 'Naples, Florida, USA' },
-    { name: 'Aspen/Pitkin County Airport (KASE)', sub: 'Aspen, Colorado, USA' },
-    { name: 'Hollywood Burbank Airport (KBUR)', sub: 'Burbank, California, USA' },
-    { name: 'Chicago Executive Airport (KPWK)', sub: 'Wheeling, Illinois, USA' },
-    { name: 'Dallas Love Field FBO (KDAL)', sub: 'Dallas, Texas, USA' },
-    { name: 'Addison Airport (KADS)', sub: 'Dallas, Texas, USA' },
-    { name: 'Las Vegas Signature Aviation (KLAS)', sub: 'Las Vegas, Nevada, USA' },
-    { name: 'San Francisco Jet Center', sub: 'San Carlos, California, USA' },
-    { name: 'Oakland North Field FBO (KOAK)', sub: 'Oakland, California, USA' },
-    { name: 'Toronto Pearson Business Aviation Centre (CYYZ)', sub: 'Toronto, Ontario, Canada' },
-    { name: 'Toronto Buttonville Municipal Airport (CYKZ)', sub: 'Toronto, Ontario, Canada' },
-    { name: 'Vancouver International Airport South Terminal (CYVR)', sub: 'Vancouver, British Columbia, Canada' },
-    { name: 'Toluca International Airport (MMTO)', sub: 'Toluca, Mexico' },
-    { name: 'Nassau Lynden Pindling International FBO (MYNN)', sub: 'Nassau, Bahamas' },
-    { name: 'London Luton Airport (EGGW)', sub: 'Luton, United Kingdom' },
-    { name: 'London Biggin Hill Airport (EGKB)', sub: 'Biggin Hill, United Kingdom' },
-    { name: 'London Farnborough Airport (EGLF)', sub: 'Farnborough, United Kingdom' },
-    { name: 'London Stansted Business Aviation Centre (EGSS)', sub: 'Stansted, United Kingdom' },
-    { name: 'Paris–Le Bourget Airport (LFPB)', sub: 'Le Bourget, France' },
-    { name: 'Nice Côte d\'Azur Airport (LFMN)', sub: 'Nice, France' },
-    { name: 'Cannes–Mandelieu Airport (LFMD)', sub: 'Cannes, France' },
-    { name: 'Geneva Airport Business Aviation Centre (LSGG)', sub: 'Geneva, Switzerland' },
-    { name: 'Zurich Airport General Aviation Centre (LSZH)', sub: 'Zurich, Switzerland' },
-    { name: 'Milan Linate Airport (LIML)', sub: 'Milan, Italy' },
-    { name: 'Rome Ciampino Airport (LIRA)', sub: 'Rome, Italy' },
-    { name: 'Amsterdam Schiphol Business Aviation (EHAM)', sub: 'Amsterdam, Netherlands' },
-    { name: 'Frankfurt Egelsbach Airport (EDFE)', sub: 'Egelsbach, Germany' },
-    { name: 'Munich Airport General Aviation Centre (EDDM)', sub: 'Munich, Germany' },
-    { name: 'Vienna International Airport GAT (LOWW)', sub: 'Vienna, Austria' },
-    { name: 'Moscow Vnukovo-3 Business Aviation Centre (UUWW)', sub: 'Moscow, Russia' },
-    { name: 'Dubai World Central – Al Maktoum International (OMDW)', sub: 'Dubai, UAE' },
-    { name: 'Dubai International Jet Centre (OMDB)', sub: 'Dubai, UAE' },
-    { name: 'Sharjah Executive Jet Centre (OMSJ)', sub: 'Sharjah, UAE' },
-    { name: 'Abu Dhabi Al Bateen Executive Airport (OMAD)', sub: 'Abu Dhabi, UAE' },
-    { name: 'Doha Hamad International Executive Aviation (OTHH)', sub: 'Doha, Qatar' },
-    { name: 'Riyadh King Khalid International Private Aviation (OERK)', sub: 'Riyadh, Saudi Arabia' },
-    { name: 'Jeddah King Abdulaziz International FBO (OEJN)', sub: 'Jeddah, Saudi Arabia' },
-    { name: 'Hong Kong Business Aviation Centre (VHHH)', sub: 'Hong Kong' },
-    { name: 'Singapore Seletar Airport (WSSL)', sub: 'Singapore' },
-    { name: 'Tokyo Haneda Airport GA Terminal (RJTT)', sub: 'Tokyo, Japan' },
-    { name: 'Beijing Capital Airport Business Aviation (ZBAA)', sub: 'Beijing, China' },
-    { name: 'Shanghai Hongqiao Business Aviation Centre (ZSSS)', sub: 'Shanghai, China' },
-    { name: 'Mumbai Chhatrapati Shivaji GA Terminal (VABB)', sub: 'Mumbai, India' },
-    { name: 'New Delhi Indira Gandhi GA Terminal (VIDP)', sub: 'New Delhi, India' },
-    { name: 'Sydney Bankstown Airport (YSBK)', sub: 'Sydney, Australia' },
-    { name: 'Melbourne Essendon Fields Airport (YMEN)', sub: 'Melbourne, Australia' },
-    { name: 'São Paulo Congonhas Airport (SBSP)', sub: 'São Paulo, Brazil' },
-    { name: 'São Paulo Catarina Executive Airport (SDCO)', sub: 'São Paulo, Brazil' },
-    { name: 'Buenos Aires Aeroparque Jorge Newbery (SABE)', sub: 'Buenos Aires, Argentina' },
-    { name: 'Johannesburg Lanseria International Airport (FALA)', sub: 'Johannesburg, South Africa' },
-    { name: 'Cape Town International GA Terminal (FACT)', sub: 'Cape Town, South Africa' }
-  ];
-
   var airportDb = null;
   var airportDbPromise = null;
   function loadAirportDb() {
@@ -210,38 +147,20 @@ document.addEventListener('DOMContentLoaded', function () {
       closeResults();
     }
 
-    function jetMatches(query, limit) {
-      if (!query) {
-        return PRIVATE_JET_TERMINALS.map(function (t) {
-          return { main: t.name, sub: t.sub, fill: t.name + ', ' + t.sub, isJet: true };
-        });
-      }
+    function airportMatches(query, limit) {
+      if (!query || !airportDb) return [];
 
       var q = query.toLowerCase();
-      var seen = {};
       var out = [];
 
-      PRIVATE_JET_TERMINALS.forEach(function (t) {
-        if (t.name.toLowerCase().indexOf(q) === -1 && t.sub.toLowerCase().indexOf(q) === -1) return;
-        var fill = t.name + ', ' + t.sub;
-        if (seen[fill]) return;
-        seen[fill] = true;
-        out.push({ main: t.name, sub: t.sub, fill: fill, isJet: true });
-      });
-
-      if (airportDb) {
-        for (var i = 0; i < airportDb.length && out.length < limit; i++) {
-          var a = airportDb[i];
-          if (a.n.toLowerCase().indexOf(q) === -1 && a.c.toLowerCase().indexOf(q) === -1 && a.i.toLowerCase().indexOf(q) === -1) continue;
-          var main = a.n + ' (' + a.i + ')';
-          var fill2 = main + ', ' + a.c;
-          if (seen[fill2]) continue;
-          seen[fill2] = true;
-          out.push({ main: main, sub: a.c, fill: fill2, isJet: true });
-        }
+      for (var i = 0; i < airportDb.length && out.length < limit; i++) {
+        var a = airportDb[i];
+        if (a.n.toLowerCase().indexOf(q) === -1 && a.c.toLowerCase().indexOf(q) === -1 && a.i.toLowerCase().indexOf(q) === -1) continue;
+        var main = a.n + ' (' + a.i + ')';
+        out.push({ main: main, sub: a.c, fill: main + ', ' + a.c });
       }
 
-      return out.slice(0, limit);
+      return out;
     }
 
     function renderResults(list) {
@@ -258,17 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      var lastSection = null;
-      list.forEach(function (item, idx) {
-        var section = item.isJet ? 'jet' : 'other';
-        if (section !== lastSection) {
-          var sLabel = document.createElement('div');
-          sLabel.className = 'autocomplete-section-label';
-          sLabel.textContent = item.isJet ? 'Private Jet Terminals Worldwide' : 'Other Locations';
-          results.appendChild(sLabel);
-          lastSection = section;
-        }
-
+      list.forEach(function (item) {
         var el = document.createElement('div');
         el.className = 'autocomplete-item';
         el.setAttribute('role', 'option');
@@ -300,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (controller) controller.abort();
       controller = new AbortController();
 
-      var url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=0&limit=6&q=' + encodeURIComponent(query);
+      var url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=0&limit=8&q=' + encodeURIComponent(query);
 
       fetch(url, { signal: controller.signal, headers: { 'Accept': 'application/json' } })
         .then(function (resp) { return resp.json(); })
@@ -310,9 +219,9 @@ document.addEventListener('DOMContentLoaded', function () {
             var parts = raw.display_name.split(',');
             var main = parts[0].trim();
             var sub = parts.slice(1).join(',').trim();
-            return { main: main, sub: sub, fill: raw.display_name, isJet: false };
+            return { main: main, sub: sub, fill: raw.display_name };
           });
-          renderResults(jetMatches(query, 6).concat(general));
+          renderResults(airportMatches(query, 4).concat(general));
         })
         .catch(function (err) {
           if (err.name !== 'AbortError') closeResults();
@@ -321,12 +230,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function refreshResults(query) {
       if (!query) {
-        renderResults(jetMatches('', 60));
-      } else if (query.length < 3) {
-        renderResults(jetMatches(query, 8));
-      } else {
-        renderResults(jetMatches(query, 6));
+        closeResults();
+        return;
       }
+      renderResults(airportMatches(query, 8));
     }
 
     input.addEventListener('focus', function () {
