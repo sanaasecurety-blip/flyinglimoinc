@@ -222,18 +222,13 @@ document.addEventListener('DOMContentLoaded', function () {
       if (controller) controller.abort();
       controller = new AbortController();
 
-      var url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=0&dedupe=1&limit=10&q=' + encodeURIComponent(query);
+      var url = '/api/places-autocomplete?q=' + encodeURIComponent(query);
 
       fetch(url, { signal: controller.signal, headers: { 'Accept': 'application/json' } })
         .then(function (resp) { return resp.json(); })
         .then(function (data) {
           if (input.value.trim() !== query) return;
-          var general = (Array.isArray(data) ? data : []).map(function (raw) {
-            var parts = raw.display_name.split(',');
-            var main = parts[0].trim();
-            var sub = parts.slice(1).join(',').trim();
-            return { main: main, sub: sub, fill: raw.display_name };
-          });
+          var general = Array.isArray(data.results) ? data.results : [];
           renderResults(airportMatches(query, 5).concat(general));
         })
         .catch(function (err) {
