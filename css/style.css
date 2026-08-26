@@ -679,6 +679,12 @@ section{ padding: 96px 0; }
   border:1px solid rgba(201,162,75,0.35);
   border-radius:3px;
   padding:2px 7px;
+  white-space:nowrap;
+}
+.autocomplete-item .ac-badge--jet{
+  color:#1a1305;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold) 55%, var(--gold-dark));
+  border-color: var(--gold-dark);
 }
 .autocomplete-empty{ padding:10px 14px; font-size:0.85rem; color: var(--muted); }
 .form-note{ text-align:center; font-size: 0.85rem; color: var(--muted); margin: 14px 0 0; }

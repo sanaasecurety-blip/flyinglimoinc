@@ -157,7 +157,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var a = airportDb[i];
         if (a.n.toLowerCase().indexOf(q) === -1 && a.c.toLowerCase().indexOf(q) === -1 && a.i.toLowerCase().indexOf(q) === -1) continue;
         var main = a.n + ' (' + a.i + ')';
-        out.push({ main: main, sub: a.c, fill: main + ', ' + a.c, isAirport: true });
+        var isMajor = a.t === 'l' && a.s === 1;
+        out.push({ main: main, sub: a.c, fill: main + ', ' + a.c, badge: isMajor ? 'Airport' : 'Private Terminal' });
       }
 
       return out;
@@ -190,10 +191,10 @@ document.addEventListener('DOMContentLoaded', function () {
         mainEl.textContent = item.main;
         row.appendChild(mainEl);
 
-        if (item.isAirport) {
+        if (item.badge) {
           var badge = document.createElement('span');
-          badge.className = 'ac-badge';
-          badge.textContent = 'Airport';
+          badge.className = 'ac-badge' + (item.badge === 'Private Terminal' ? ' ac-badge--jet' : '');
+          badge.textContent = item.badge;
           row.appendChild(badge);
         }
 
