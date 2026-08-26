@@ -166,6 +166,18 @@ document.addEventListener('DOMContentLoaded', function () {
     { name: 'Cape Town International GA Terminal (FACT)', sub: 'Cape Town, South Africa' }
   ];
 
+  var airportDb = null;
+  var airportDbPromise = null;
+  function loadAirportDb() {
+    if (!airportDbPromise) {
+      airportDbPromise = fetch('assets/data/airports.json')
+        .then(function (resp) { return resp.json(); })
+        .then(function (data) { airportDb = Array.isArray(data) ? data : []; return airportDb; })
+        .catch(function () { airportDb = []; return airportDb; });
+    }
+    return airportDbPromise;
+  }
+
   function setupLocationAutocomplete(inputId, resultsId) {
     var input = document.getElementById(inputId);
     var results = document.getElementById(resultsId);
@@ -198,14 +210,38 @@ document.addEventListener('DOMContentLoaded', function () {
       closeResults();
     }
 
-    function jetMatches(query) {
+    function jetMatches(query, limit) {
+      if (!query) {
+        return PRIVATE_JET_TERMINALS.map(function (t) {
+          return { main: t.name, sub: t.sub, fill: t.name + ', ' + t.sub, isJet: true };
+        });
+      }
+
       var q = query.toLowerCase();
-      var list = query ? PRIVATE_JET_TERMINALS.filter(function (t) {
-        return t.name.toLowerCase().indexOf(q) !== -1 || t.sub.toLowerCase().indexOf(q) !== -1;
-      }) : PRIVATE_JET_TERMINALS.slice();
-      return list.map(function (t) {
-        return { main: t.name, sub: t.sub, fill: t.name + ', ' + t.sub, isJet: true };
+      var seen = {};
+      var out = [];
+
+      PRIVATE_JET_TERMINALS.forEach(function (t) {
+        if (t.name.toLowerCase().indexOf(q) === -1 && t.sub.toLowerCase().indexOf(q) === -1) return;
+        var fill = t.name + ', ' + t.sub;
+        if (seen[fill]) return;
+        seen[fill] = true;
+        out.push({ main: t.name, sub: t.sub, fill: fill, isJet: true });
       });
+
+      if (airportDb) {
+        for (var i = 0; i < airportDb.length && out.length < limit; i++) {
+          var a = airportDb[i];
+          if (a.n.toLowerCase().indexOf(q) === -1 && a.c.toLowerCase().indexOf(q) === -1 && a.i.toLowerCase().indexOf(q) === -1) continue;
+          var main = a.n + ' (' + a.i + ')';
+          var fill2 = main + ', ' + a.c;
+          if (seen[fill2]) continue;
+          seen[fill2] = true;
+          out.push({ main: main, sub: a.c, fill: fill2, isJet: true });
+        }
+      }
+
+      return out.slice(0, limit);
     }
 
     function renderResults(list) {
@@ -276,39 +312,40 @@ document.addEventListener('DOMContentLoaded', function () {
             var sub = parts.slice(1).join(',').trim();
             return { main: main, sub: sub, fill: raw.display_name, isJet: false };
           });
-          renderResults(jetMatches(query).slice(0, 6).concat(general));
+          renderResults(jetMatches(query, 6).concat(general));
         })
         .catch(function (err) {
           if (err.name !== 'AbortError') closeResults();
         });
     }
 
-    input.addEventListener('focus', function () {
-      var query = input.value.trim();
+    function refreshResults(query) {
       if (!query) {
-        renderResults(jetMatches('').slice(0, 60));
+        renderResults(jetMatches('', 60));
+      } else if (query.length < 3) {
+        renderResults(jetMatches(query, 8));
+      } else {
+        renderResults(jetMatches(query, 6));
       }
+    }
+
+    input.addEventListener('focus', function () {
+      refreshResults(input.value.trim());
+      loadAirportDb().then(function () {
+        if (document.activeElement === input) refreshResults(input.value.trim());
+      });
     });
 
     input.addEventListener('input', function () {
       var query = input.value.trim();
       clearTimeout(debounceTimer);
+      refreshResults(query);
 
-      if (!query) {
-        renderResults(jetMatches('').slice(0, 60));
-        return;
+      if (query.length >= 3) {
+        debounceTimer = setTimeout(function () {
+          search(query);
+        }, 350);
       }
-
-      if (query.length < 3) {
-        renderResults(jetMatches(query).slice(0, 8));
-        return;
-      }
-
-      renderResults(jetMatches(query).slice(0, 6));
-
-      debounceTimer = setTimeout(function () {
-        search(query);
-      }, 350);
     });
 
     input.addEventListener('keydown', function (e) {
