@@ -649,7 +649,7 @@ section{ padding: 96px 0; }
   border:1px solid #ddd3b8;
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
-  max-height:270px;
+  max-height:340px;
   overflow-y:auto;
   z-index:30;
 }

@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (controller) controller.abort();
       controller = new AbortController();
 
-      var url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=0&limit=8&q=' + encodeURIComponent(query);
+      var url = 'https://nominatim.openstreetmap.org/search?format=json&addressdetails=0&dedupe=1&limit=10&q=' + encodeURIComponent(query);
 
       fetch(url, { signal: controller.signal, headers: { 'Accept': 'application/json' } })
         .then(function (resp) { return resp.json(); })
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var sub = parts.slice(1).join(',').trim();
             return { main: main, sub: sub, fill: raw.display_name };
           });
-          renderResults(airportMatches(query, 4).concat(general));
+          renderResults(airportMatches(query, 5).concat(general));
         })
         .catch(function (err) {
           if (err.name !== 'AbortError') closeResults();
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
         closeResults();
         return;
       }
-      renderResults(airportMatches(query, 8));
+      renderResults(airportMatches(query, 10));
     }
 
     input.addEventListener('focus', function () {
@@ -261,10 +261,10 @@ document.addEventListener('DOMContentLoaded', function () {
       clearTimeout(debounceTimer);
       refreshResults(query);
 
-      if (query.length >= 3) {
+      if (query.length >= 2) {
         debounceTimer = setTimeout(function () {
           search(query);
-        }, 350);
+        }, 300);
       }
     });
 
