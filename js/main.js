@@ -103,6 +103,55 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  var CITY_JET_ALIASES = {
+    'san francisco': ['SQL', 'OAK', 'HWD', 'PAO'],
+    'silicon valley': ['SQL', 'PAO', 'RHV'],
+    'new york': ['TEB', 'HPN', 'FRG'],
+    'nyc': ['TEB', 'HPN', 'FRG'],
+    'manhattan': ['TEB', 'HPN'],
+    'los angeles': ['VNY', 'BUR', 'SMO'],
+    'la': ['VNY', 'BUR'],
+    'chicago': ['PWK', 'DPA'],
+    'dallas': ['DAL', 'ADS'],
+    'houston': ['HOU', 'DWH'],
+    'miami': ['OPF', 'TMB', 'FXE'],
+    'fort lauderdale': ['FXE'],
+    'palm beach': ['PBI', 'LNA'],
+    'las vegas': ['LAS', 'VGT'],
+    'denver': ['APA', 'BJC'],
+    'aspen': ['ASE'],
+    'phoenix': ['SDL', 'DVT'],
+    'scottsdale': ['SDL'],
+    'seattle': ['BFI', 'RNT'],
+    'boston': ['BED', 'OWD'],
+    'washington': ['IAD', 'DCA'],
+    'atlanta': ['PDK', 'FTY'],
+    'london': ['EGLF', 'EGKB', 'EGGW', 'EGSS'],
+    'paris': ['LBG'],
+    'geneva': ['GVA'],
+    'zurich': ['ZRH'],
+    'nice': ['NCE'],
+    'cannes': ['CEQ'],
+    'milan': ['LIN'],
+    'rome': ['CIA'],
+    'monaco': ['MCM'],
+    'dubai': ['DWC', 'SHJ'],
+    'abu dhabi': ['AZI'],
+    'doha': ['DOH'],
+    'riyadh': ['RUH'],
+    'hong kong': ['HKG'],
+    'singapore': ['XSP'],
+    'tokyo': ['HND'],
+    'mumbai': ['BOM'],
+    'sydney': ['BWU'],
+    'melbourne': ['MEB'],
+    'sao paulo': ['CGH', 'SDU'],
+    'são paulo': ['CGH', 'SDU'],
+    'buenos aires': ['AEP'],
+    'johannesburg': ['HLA'],
+    'cape town': ['CPT']
+  };
+
   var airportDb = null;
   var airportDbPromise = null;
   function loadAirportDb() {
@@ -147,18 +196,39 @@ document.addEventListener('DOMContentLoaded', function () {
       closeResults();
     }
 
+    function toItem(a) {
+      var main = a.n + ' (' + a.i + ')';
+      var isMajor = a.t === 'l' && a.s === 1;
+      return { main: main, sub: a.c, fill: main + ', ' + a.c, badge: isMajor ? 'Airport' : 'Private Terminal' };
+    }
+
     function airportMatches(query, limit) {
       if (!query || !airportDb) return [];
 
       var q = query.toLowerCase();
       var out = [];
+      var seen = {};
+
+      for (var city in CITY_JET_ALIASES) {
+        if (q.indexOf(city) === -1) continue;
+        CITY_JET_ALIASES[city].forEach(function (code) {
+          if (out.length >= limit || seen[code]) return;
+          for (var j = 0; j < airportDb.length; j++) {
+            if (airportDb[j].i === code) {
+              seen[code] = true;
+              out.push(toItem(airportDb[j]));
+              break;
+            }
+          }
+        });
+      }
 
       for (var i = 0; i < airportDb.length && out.length < limit; i++) {
         var a = airportDb[i];
+        if (seen[a.i]) continue;
         if (a.n.toLowerCase().indexOf(q) === -1 && a.c.toLowerCase().indexOf(q) === -1 && a.i.toLowerCase().indexOf(q) === -1) continue;
-        var main = a.n + ' (' + a.i + ')';
-        var isMajor = a.t === 'l' && a.s === 1;
-        out.push({ main: main, sub: a.c, fill: main + ', ' + a.c, badge: isMajor ? 'Airport' : 'Private Terminal' });
+        seen[a.i] = true;
+        out.push(toItem(a));
       }
 
       return out;
