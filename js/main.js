@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var a = airportDb[i];
         if (a.n.toLowerCase().indexOf(q) === -1 && a.c.toLowerCase().indexOf(q) === -1 && a.i.toLowerCase().indexOf(q) === -1) continue;
         var main = a.n + ' (' + a.i + ')';
-        out.push({ main: main, sub: a.c, fill: main + ', ' + a.c });
+        out.push({ main: main, sub: a.c, fill: main + ', ' + a.c, isAirport: true });
       }
 
       return out;
@@ -182,10 +182,22 @@ document.addEventListener('DOMContentLoaded', function () {
         el.className = 'autocomplete-item';
         el.setAttribute('role', 'option');
 
+        var row = document.createElement('div');
+        row.className = 'ac-row';
+
         var mainEl = document.createElement('span');
         mainEl.className = 'ac-main';
         mainEl.textContent = item.main;
-        el.appendChild(mainEl);
+        row.appendChild(mainEl);
+
+        if (item.isAirport) {
+          var badge = document.createElement('span');
+          badge.className = 'ac-badge';
+          badge.textContent = 'Airport';
+          row.appendChild(badge);
+        }
+
+        el.appendChild(row);
 
         if (item.sub) {
           var subEl = document.createElement('span');
